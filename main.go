@@ -127,13 +127,16 @@ func main() {
 
 	http.Handle(*metricsPath, promhttp.Handler())
 	http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-		w.Write([]byte(`<html>
+        _, err := w.Write([]byte(`<html>
 			<head><title>Smokeping Exporter</title></head>
 			<body>
 			<h1>Smokeping Exporter</h1>
 			<p><a href="` + *metricsPath + `">Metrics</a></p>
 			</body>
 			</html>`))
+        if err != nil {
+            log.Warnf("Error writing http: %v", err)
+        }
 	})
 	log.Infof("Listening on %s", *listenAddress)
 	log.Fatal(http.ListenAndServe(*listenAddress, nil))

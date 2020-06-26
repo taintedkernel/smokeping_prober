@@ -8,4 +8,4 @@ ARG OS="linux"
 COPY .build/${OS}-${ARCH}/smokeping_prober /bin/smokeping_prober
 
 EXPOSE 9374
-ENTRYPOINT  [ "/bin/smokeping_prober" ]
+ENTRYPOINT [ "/bin/smokeping_prober" ]
